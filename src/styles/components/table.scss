@@ -1,0 +1,31 @@
+table {
+    width: 90vw;
+    margin: 50px 5%;
+    text-align: left;
+
+    thead {
+        width: 100%;
+       
+
+        th {
+            font-size: 20px;
+            border-bottom: 1px solid black; 
+            border-collapse: separate; 
+            padding: 20px 10px;
+        }
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #DCDCDC;
+        border: 0;
+    }
+    td{
+        padding: 10px;
+    }
+
+
+
+
+
+
+}

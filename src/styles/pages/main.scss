@@ -1,0 +1,102 @@
+.main {
+  .title {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  h1 {
+    text-align: center;
+    font-size: 150%;
+  }
+  hr {
+    margin: 0 5% 0 5%;
+    border: 1px solid silver;
+  }
+
+  .emptymessage {
+    strong {
+      color: #c70000;
+    }
+    h2 {
+      margin-top: 20%;
+      text-align: center;
+    }
+    h4 {
+      text-align: center;
+    }
+  }
+  .listnews {
+    margin: 0 3% 0 3%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .listnews {
+      margin: 0 5% 0 5%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      justify-items: center;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .listnews {
+      margin: 0 7% 0 7%;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 10px;
+    }
+  }
+  .spinner {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+  }
+  .spinner span {
+    font-size: 2rem;
+    animation: fade 1s linear 0s infinite;
+    padding-right: 1rem;
+  }
+
+  .half-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid blue;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.5s linear 0s infinite;
+  }
+
+  @keyframes bigger {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(2);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
