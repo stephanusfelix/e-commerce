@@ -1,41 +1,52 @@
-.main {
+.Homemain {
   .title {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  h1 {
-    text-align: center;
-    font-size: 150%;
-  }
   hr {
-    margin: 0 5% 0 5%;
+    margin: auto;
     border: 1px solid silver;
   }
 
-  .emptymessage {
-    strong {
-      color: #c70000;
-    }
-    h2 {
-      margin-top: 20%;
-      text-align: center;
-    }
-    h4 {
-      text-align: center;
-    }
+  .Hometitle {
+    text-align: left;
+    font-size: 150%;
+    margin: 10px;
   }
-  .listnews {
-    margin: 0 3% 0 3%;
+
+  .Homelistproduct {
+    margin: auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
     justify-items: center;
   }
 
-  @media screen and (max-width: 1200px) {
-    .listnews {
-      margin: 0 5% 0 5%;
+  @media screen and (max-width: 1950px) {
+    .Homelistproduct {
+      // margin: 0 5% 0 5%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 20px;
+      justify-items: center;
+    }
+  }
+
+  @media screen and (max-width: 1600px) {
+    .Homelistproduct {
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      justify-items: center;
+    }
+  }
+
+  @media screen and (max-width: 1250px) {
+    .Homelistproduct {
+      margin: auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
@@ -43,9 +54,9 @@
     }
   }
 
-  @media screen and (max-width: 750px) {
-    .listnews {
-      margin: 0 7% 0 7%;
+  @media screen and (max-width: 850px) {
+    .Homelistproduct {
+      margin: auto;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       grid-gap: 10px;
