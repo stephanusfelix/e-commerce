@@ -3,6 +3,7 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 function ButtonGroup(props) {
+  const id = props.id;
   const style = {
     display: "flex",
     alignItems: "center",
@@ -17,7 +18,7 @@ function ButtonGroup(props) {
   return (
     <>
       <div style={style}>
-        <Link to={`/${props.id}`}>
+        <Link to={`/${id}`}>
           <Button theme={"blue"}>Detail</Button>
         </Link>
 
