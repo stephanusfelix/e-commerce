@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/main";
 import Page from "./route/index";
+
 const renderPage = () => {
   return (
     <>
@@ -11,6 +12,7 @@ const renderPage = () => {
     </>
   );
 };
+
 const renderHome = () => {
   return (
     <>
@@ -19,6 +21,7 @@ const renderHome = () => {
     </>
   );
 };
+
 class App extends React.Component {
   render() {
     return (
