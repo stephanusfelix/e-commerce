@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/main";
 import Page from "./route/index";
+import { connect } from "react-redux";
 const renderPage = () => {
   return (
     <>
@@ -19,8 +20,13 @@ const renderHome = () => {
     </>
   );
 };
-class App extends React.Component {
-  render() {
+
+function App (props) {
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('item'));
+    props.add(items)
+    localStorage.setItem('user',JSON.parse(true))
+  });
     return (
       <BrowserRouter>
         <Switch>
@@ -29,6 +35,11 @@ class App extends React.Component {
         </Switch>
       </BrowserRouter>
     );
-  }
+  
 }
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: (item) => dispatch({ type: "ADD_ITEMS", payload: { item: item } }),
+  };
+};
+export default connect(null, mapDispatchToProps)(App);

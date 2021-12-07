@@ -30,7 +30,7 @@ function ButtonGroup(props) {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    add: (news) => dispatch({ type: "ADD_NEWS", payload: { news: news } }),
+    add: (item) => dispatch({ type: "ADD_ITEM", payload: { item: item } }),
   };
 };
 export default connect(null, mapDispatchToProps)(ButtonGroup);
