@@ -34,7 +34,7 @@ const Navbar = (props) => {
         <div className="Product-description">
           <Desc description={data.description} />
         </div>
-        <ButtonGroup id={data.id} />
+        <ButtonGroup id={data.id} item={data}/>
       </div>
     </>
   );

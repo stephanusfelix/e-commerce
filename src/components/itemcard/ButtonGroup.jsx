@@ -22,8 +22,8 @@ function ButtonGroup(props) {
           <Button theme={"blue"}>Detail</Button>
         </Link>
 
-        <Button theme={"white"} click={() => props.add(props.save)}>
-          Add to Chart
+        <Button theme={"white"} click={() => props.add(props.item)}>
+          Add to Cart
         </Button>
       </div>
     </>

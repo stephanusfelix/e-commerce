@@ -26,6 +26,7 @@ function App (props) {
     const items = JSON.parse(localStorage.getItem('item'));
     props.add(items)
     localStorage.setItem('user',JSON.parse(true))
+    //user/admin true = sudah login 
   });
     return (
       <BrowserRouter>
