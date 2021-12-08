@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/main";
 import Page from "./route/index";
 import { connect } from "react-redux";
+
 const renderPage = () => {
   return (
     <>
@@ -12,6 +13,7 @@ const renderPage = () => {
     </>
   );
 };
+
 const renderHome = () => {
   return (
     <>
@@ -21,6 +23,10 @@ const renderHome = () => {
   );
 };
 
+
+class App extends React.Component {
+  render() {
+
 function App (props) {
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('item'));
@@ -28,6 +34,7 @@ function App (props) {
     localStorage.setItem('user',JSON.parse(true))
     //user/admin true = sudah login 
   });
+
     return (
       <BrowserRouter>
         <Switch>
