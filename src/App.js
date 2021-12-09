@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/main";
@@ -23,27 +23,21 @@ const renderHome = () => {
   );
 };
 
-
-class App extends React.Component {
-  render() {
-
-function App (props) {
+function App(props) {
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('item'));
-    props.add(items)
-    localStorage.setItem('user',JSON.parse(true))
-    //user/admin true = sudah login 
+    const items = JSON.parse(localStorage.getItem("item"));
+    props.add(items);
+    localStorage.setItem("user", JSON.parse(true));
+    //user/admin true = sudah login
   });
-
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={renderHome} />
-          <Route path="/:page" component={renderPage} />
-        </Switch>
-      </BrowserRouter>
-    );
-  
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={renderHome} />
+        <Route path="/:page" component={renderPage} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 const mapDispatchToProps = (dispatch) => {
   return {
