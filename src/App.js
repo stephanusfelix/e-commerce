@@ -25,7 +25,7 @@ function App (props) {
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('item'));
     props.add(items)
-    localStorage.setItem('user',JSON.parse(true))
+    localStorage.setItem('admin',JSON.parse(false))
     //user/admin true = sudah login 
   });
     return (

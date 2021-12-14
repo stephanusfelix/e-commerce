@@ -21,11 +21,20 @@ function Button(props) {
     color: "blue",
     backgroundColor: "white",
   };
+  const style3 = {
+    ...style,
+    backgroundColor: "blue",
+    borderRadius:'5px',
+    border: "1px solid blue",
+    color: "white",
+  };
   let styles = {};
   if (props.theme === "blue") {
     styles = style2;
   } else if (props.theme === "white") {
     styles = style1;
+  }else if (props.theme === "white1") {
+    styles = style3;
   }
   return (
     <>

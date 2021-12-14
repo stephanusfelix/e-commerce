@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
@@ -9,7 +10,11 @@ function Main(props) {
   let url = "https://fakestoreapi.com/products";
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  let history = useHistory();
+  if (JSON.parse(localStorage.getItem("admin"))) {
+    history.push(`/homeAdmin`)
+  }
+  
   useEffect(() => {
     axios
       .get(url)
