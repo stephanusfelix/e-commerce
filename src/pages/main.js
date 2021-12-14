@@ -2,6 +2,8 @@ import { React, useState, useEffect } from "react";
 import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
+import { filterResponse } from "../config/filterResponse";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 function Main(props) {
@@ -9,14 +11,17 @@ function Main(props) {
   let url = "https://fakestoreapi.com/products";
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const stock = useSelector((state) => state.data.data);
 
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        // setData(response.data);
         setIsLoaded(true);
         console.log(response.data);
+        let filter = filterResponse(response.data, stock);
+        setData(filter);
       })
       .catch((error) => {
         setIsLoaded(true);
@@ -48,7 +53,7 @@ function Main(props) {
           {data ? (
             <div className="Homelistproduct">
               {data.map((product, index) => (
-                <ItemCard data={product} key={index} />
+                <ItemCard product={product} key={index} />
               ))}
             </div>
           ) : (

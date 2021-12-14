@@ -29,7 +29,12 @@ function Button(props) {
   }
   return (
     <>
-      <button onClick={props.click} style={styles}>
+      <button
+        onClick={props.click}
+        style={styles}
+        disabled={props.disable}
+        onClick={props.click}
+      >
         {props.children}
       </button>
     </>

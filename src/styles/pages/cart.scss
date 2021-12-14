@@ -1,0 +1,30 @@
+.main {
+  .heading {
+    text-align: center;
+  }
+  .table {
+    background: #ffffff;
+    border-radius: 0.6em;
+    overflow: hidden;
+    clear: both;
+    margin-bottom: 1.8em;
+  }
+
+  .table-head {
+    background: blue;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bottom-container {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+  }
+}
