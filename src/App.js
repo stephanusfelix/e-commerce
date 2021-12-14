@@ -1,9 +1,10 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/main";
 import Page from "./route/index";
 import { connect } from "react-redux";
+
 const renderPage = () => {
   return (
     <>
@@ -12,6 +13,7 @@ const renderPage = () => {
     </>
   );
 };
+
 const renderHome = () => {
   return (
     <>
@@ -21,22 +23,21 @@ const renderHome = () => {
   );
 };
 
-function App (props) {
+function App(props) {
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('item'));
     props.add(items)
     localStorage.setItem('admin',JSON.parse(false))
     //user/admin true = sudah login 
   });
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={renderHome} />
-          <Route path="/:page" component={renderPage} />
-        </Switch>
-      </BrowserRouter>
-    );
-  
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={renderHome} />
+        <Route path="/:page" component={renderPage} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 const mapDispatchToProps = (dispatch) => {
   return {
