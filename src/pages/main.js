@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
@@ -12,6 +13,11 @@ function Main(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const stock = useSelector((state) => state.data.data);
+
+  let history = useHistory();
+  if (JSON.parse(localStorage.getItem("admin"))) {
+    history.push(`/homeAdmin`);
+  }
 
   useEffect(() => {
     axios
