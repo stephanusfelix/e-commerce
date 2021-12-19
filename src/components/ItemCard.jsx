@@ -6,23 +6,14 @@ import { useHistory } from "react-router";
 import { addData } from "../redux/dataReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Desc, Image, Title, Category, Price } from "./itemcard/index.js";
+import { connect } from "react-redux";
 
-const Navbar = (props) => {
+const ItemCard = (props) => {
   const product = props.product;
   const dispatch = useDispatch();
   const history = useHistory();
   const token = useState(true);
 
-  function add(item) {
-    //belum ditambah if else untuk cek apakah user sudah login
-    const data = {
-      id: item.id,
-      countCart: 1,
-      totalStock: item.totalStock,
-      totalSales: 0,
-    };
-    dispatch(addData(data));
-  }
   return (
     <>
       <div className="Product-card">
@@ -55,7 +46,7 @@ const Navbar = (props) => {
           <Button
             theme={"white"}
             disable={product.totalStock > 0 ? false : true}
-            click={() => add(product)}
+            click={() => props.add(product)}
           >
             {" "}
             Add to Cart
@@ -67,4 +58,9 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: (item) => dispatch({ type: "ADD_ITEM", payload: { item: item } }),
+  };
+};
+export default connect(null, mapDispatchToProps)(ItemCard);

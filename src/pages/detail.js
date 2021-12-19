@@ -1,28 +1,13 @@
 import { React, useState, useEffect } from "react";
 import "../styles/pages/detail.scss";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 import { Image, Title, Category, Price } from "../components/itemcard/index.js";
-import { addData } from "../redux/dataReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-function Detail() {
-  const token = useState(false);
-
+function Detail(props) {
   const { state } = useLocation();
-  const history = useHistory();
   const [currentStock, setCurrentStock] = useState(1);
-  const dispatch = useDispatch();
 
-  const addToCart = () => {
-    const data = {
-      id: state.detail.id,
-      countCart: currentStock,
-      totalStock: state.detail.totalStock,
-      totalSales: state.detail.totalSales,
-    };
-    dispatch(addData(data));
-    setCurrentStock(0);
-  };
   return (
     <>
       <section className="product">
@@ -51,7 +36,11 @@ function Detail() {
                 onChange={(v) => setCurrentStock(v.target.value)}
                 style={{ width: 50 }}
               />
-              <button type="button" className="buy--btn" onClick={addToCart}>
+              <button
+                type="button"
+                className="buy--btn"
+                onClick={() => props.add(state.detail)}
+              >
                 ADD TO CART
               </button>
             </div>
@@ -67,4 +56,9 @@ function Detail() {
   );
 }
 
-export default Detail;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: (item) => dispatch({ type: "ADD_ITEM", payload: { item: item } }),
+  };
+};
+export default connect(null, mapDispatchToProps)(Detail);

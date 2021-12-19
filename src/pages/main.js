@@ -4,7 +4,6 @@ import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
 import { filterResponse } from "../config/filterResponse";
-import { useSelector } from "react-redux";
 import axios from "axios";
 
 function Main(props) {
@@ -12,7 +11,7 @@ function Main(props) {
   let url = "https://fakestoreapi.com/products";
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const stock = useSelector((state) => state.data.data);
+  const stock = useState([]);
 
   let history = useHistory();
   if (JSON.parse(localStorage.getItem("admin"))) {

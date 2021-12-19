@@ -9,7 +9,7 @@ function HomeAdmin(props) {
   let history = useHistory();
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("user"))) {
-      history.push(`/`)
+      history.push(`/`);
     }
     if (!JSON.parse(localStorage.getItem("k1_items"))) {
       let datas = [];
