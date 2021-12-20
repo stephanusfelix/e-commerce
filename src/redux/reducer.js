@@ -24,8 +24,7 @@ const counterReducer = (
 ) => {
   switch (action.type) {
     case "ADD_ITEM":
-      let item = state.item;
-      item.push(action.payload.item);
+      state.item.push(action.payload.item);
       localStorage.setItem("item", JSON.stringify(state.item));
       alert("Item " + action.payload.item.title + " is added");
       return {

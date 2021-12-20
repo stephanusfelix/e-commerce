@@ -4,7 +4,7 @@ export function filterResponse(res = [], stock = []) {
     res.map((item, index) => {
       const newItem = Object.assign({}, item, {
         countCart: 0,
-        totalStock: 20,
+        total: 20,
         totalSales: 0,
         totalPriceCart: 0,
         totalPriceSales: 0,
@@ -14,7 +14,7 @@ export function filterResponse(res = [], stock = []) {
         if (item.id == items.id) {
           temp[index] = Object.assign({}, item, {
             countCart: items.countCart,
-            totalStock: items.totalStock,
+            total: items.total,
             totalSales: items.totalSales,
             totalPriceCart: (items.countCart * item.price).toFixed(2),
             totalPriceSales: (items.totalSales * item.price).toFixed(2),
@@ -26,7 +26,7 @@ export function filterResponse(res = [], stock = []) {
     res.map((item, index) => {
       const newItem = Object.assign({}, item, {
         countCart: 0,
-        totalStock: 20,
+        total: 20,
         totalSales: 0,
         totalPriceCart: 0,
         totalPriceSales: 0,

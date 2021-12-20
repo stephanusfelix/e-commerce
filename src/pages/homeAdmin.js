@@ -17,7 +17,7 @@ function HomeAdmin(props) {
         .get(url)
         .then((response) => {
           response.data.map((item) => {
-            datas.push({ ...item, total: 20 });
+            datas.push({ ...item, total: 25 });
           });
           localStorage.setItem("k1_items", JSON.stringify(datas));
         })
@@ -29,6 +29,7 @@ function HomeAdmin(props) {
       setData(JSON.parse(localStorage.getItem("k1_items")));
     }
   }, [url]);
+
   return (
     <div>
       <h1>Product</h1>

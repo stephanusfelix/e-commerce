@@ -3,16 +3,30 @@ import "../styles/components/itemcard.scss";
 import Button from "./itemcard/Button";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { addData } from "../redux/dataReducer";
+import { addToCartData } from "../redux/dataReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Desc, Image, Title, Category, Price } from "./itemcard/index.js";
-import { connect } from "react-redux";
 
 const ItemCard = (props) => {
   const product = props.product;
   const dispatch = useDispatch();
   const history = useHistory();
-  const token = useState(true);
+
+  function add(item) {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      const data = {
+        ...item,
+        countCart: item.countCart + 1,
+        total: item.total,
+        totalSales: 0,
+      };
+      dispatch(addToCartData(data));
+      alert("Product " + item.title + " successfully added to cart");
+    } else {
+      history.push("/login");
+      alert("Please login first to continue");
+    }
+  }
 
   return (
     <>
@@ -37,7 +51,6 @@ const ItemCard = (props) => {
         <div className="Product-description">
           <Desc description={product.description} />
         </div>
-        {/* <ButtonGroup id={product.id} item={product} /> */}
         <div className="button-group">
           <Link to={{ pathname: `/${product.id}`, state: { detail: product } }}>
             <Button theme={"blue"}>Detail</Button>
@@ -45,22 +58,22 @@ const ItemCard = (props) => {
 
           <Button
             theme={"white"}
-            disable={product.totalStock > 0 ? false : true}
-            click={() => props.add(product)}
+            disable={product.total > 0 ? false : true}
+            click={() => add(product)}
           >
             {" "}
             Add to Cart
           </Button>
         </div>
-        <p className="sales">Stock {product.totalStock}</p>
+
+        {product.total > 0 ? (
+          <p className="stock-available">Available : {product.total}</p>
+        ) : (
+          <p className="stock-unavailable">Out of Stock : {product.total}</p>
+        )}
       </div>
     </>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    add: (item) => dispatch({ type: "ADD_ITEM", payload: { item: item } }),
-  };
-};
-export default connect(null, mapDispatchToProps)(ItemCard);
+export default ItemCard;
