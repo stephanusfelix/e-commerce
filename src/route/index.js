@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import Login from "../pages/login";
 import Main from "../pages/main";
 import Detail from "../pages/detail";
-import AdminHome from "../pages/homeAdmin"
+import AdminHome from "../pages/homeAdmin";
+import AdminRekap from "../pages/adminRekap";
 
 export default class Routes extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class Routes extends React.Component {
         <Route path="/login" component={Login} />
         <Route exact path="/" component={Main} />
         <Route path="/homeAdmin" component={AdminHome}/>
+        <Route path="/adminRekap" component={AdminRekap}/>
         <Route path="/:id" component={Detail} />
       </Switch>
     );
