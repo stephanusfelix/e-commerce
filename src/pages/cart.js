@@ -18,51 +18,19 @@ function Cart(props) {
   const [prices, setPrices] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        // setData(response.data);
-        setIsLoaded(true);
-        console.log(response.data);
-        let filter = filterResponse(response.data, stock).filter(
-          (item) => item.countCart > 0
-        );
-        if (filter.length > 0) {
-          let price = filter.map((item) =>
-            item.countCart > item.total ? 0 : item.totalPriceCart
-          );
-          price = price.reduce(
-            (prev, curr) => parseFloat(prev) + parseFloat(curr)
-          );
-          let outStock = filter.filter((item) => item.countCart > item.total);
-          if (outStock.length > 0) {
-            // toast.warning(outStock.length + " item can't be processed");
-            console.log("item kosong");
-          }
-          setPrices(price);
-        }
-        setCart(filter);
+    const data = JSON.parse(localStorage.getItem("k2_cart"));
+    if(JSON.parse(localStorage.getItem("k2_cart"))){
+      
+      setCart(data)
+      let totalHarga = 0;
+      data.map((item)=>{
+        totalHarga+= (item.countCart*item.price)
       })
-      .catch((error) => {
-        setIsLoaded(true);
-        setError(error);
-        console.log(error);
-      });
-  }, [url]);
+      setPrices(totalHarga)
+    }
+  }, []);
 
-  if (error) {
-    return (
-      <div className="errormessage">
-        <h1>
-          <strong>404 |</strong> Not Found
-        </h1>
-        Keterangan : {error.message}
-      </div>
-    );
-  }
-  if (!isLoaded) {
-    return <Spinner />;
-  }
+
 
   if (cart) {
     return (
@@ -95,7 +63,6 @@ function Cart(props) {
     );
   }
   function ItemCart({ item }) {
-    const [countCart, setCountCart] = useState(item.countCart);
 
     let isAvailable = true;
     if (item.countCart > item.total) {
@@ -116,45 +83,112 @@ function Cart(props) {
             min={0}
             placeholder="0"
             className="quantity form-control"
-            value={countCart}
+            value={item.countCart}
             onChange={(v) => {
-              setCountCart(v.target.value);
-            }}
-            onBlur={() => {
-              changeCountCart(countCart);
+              setCountCart(v.target.value,item.id);
             }}
           />
         </div>
         <div class="prices">
-          <div class="amount"> ${item.totalPriceCart}</div>
+          <div class="amount"> ${item.countCart * item.price}</div>
         </div>
       </div>
     );
 
-    async function changeCountCart(value) {
-      const data = {
-        id: item.id,
-        countCart: parseInt(value) - item.countCart,
-        total: item.total,
-        totalSales: item.totalSales,
-      };
-      dispatch(addToCartData(data));
+    function setCountCart(value,id) {
+      const updateData = []
+      cart.map((item)=>{
+        if(id===item.id){
+          item.countCart=value;
+          updateData.push(item)
+        }else{
+          updateData.push(item)
+        }
+      })
+      setCart(updateData)
+      localStorage.setItem("k2_cart", JSON.stringify(updateData))
+      updateTotalPrice()
+    }
+    function updateTotalPrice(){
+      let totalHarga = 0;
+      cart.map((item)=>{
+        totalHarga+= (item.countCart*item.price)
+      })
+      setPrices(totalHarga)
     }
   }
 
   async function checkoutProduct() {
     const data = cart.filter((item) => item.total >= item.countCart);
     if (data.length > 0) {
-      alert("Checkout Berhasil");
-      data.map((item) => {
-        dispatch(
-          checkoutData({
-            ...item,
-            countCart: item.countCart,
+
+      const allItem = JSON.parse(localStorage.getItem("k2_items"));
+      console.log("Before",allItem)
+      const newAllItem = []
+      let change = false;
+      allItem.map((item)=>{
+        cart.map((item2)=>{
+          if(item.id===item2.id){
+            item.total-=item2.countCart;
+            newAllItem.push(item)
+            change = true;
+          }
+        })
+        if(!change){
+          newAllItem.push(item)
+        }
+        change=false;
+      })
+      console.log("After",newAllItem)
+      localStorage.setItem("k2_items", JSON.stringify(newAllItem))
+      
+      if(!JSON.parse(localStorage.getItem("k2_recap"))){
+        console.log('if new',cart)
+        localStorage.setItem("k2_recap", JSON.stringify(cart))
+      }else {
+        const dataRecap = JSON.parse(localStorage.getItem("k2_recap"));
+        let newDataRecap = []
+        dataRecap.map((item)=>{
+          cart.map((item2)=>{
+            if(item.id===item2.id){
+              item.countCart+=item2.countCart
+              newDataRecap.push(item)
+              change = true;
+            }
+            if(!change){
+              newDataRecap.push(item)
+            }
+            change = false;
           })
-        );
-      });
-      history.push(`/`);
+        })
+        console.log('midle',newDataRecap)
+        let index = 0
+        let newRecaps = false;
+        let haveRecaps = false;
+        for(let i = 0;i<cart.length;i++){
+          while(index<dataRecap.length){
+            if(cart[i].id!==dataRecap[index].id){
+              index++;
+              newRecaps = true;
+            }else{
+              haveRecaps = true;
+              index++;
+            }
+          }
+          if(newRecaps && !haveRecaps){
+            newDataRecap.push(cart[i])
+          }
+          newRecaps = false;
+          haveRecaps = false;
+        }
+        console.log("if any",newDataRecap)
+        localStorage.setItem("k2_recap", JSON.stringify([...newDataRecap]))
+      }
+      localStorage.removeItem("k2_cart");
+      setCart([])
+      setPrices(0)
+      alert("Checkout Berhasil");
+      // history.push(`/`);
     } else {
       console.log(data);
       alert("Checkout gagal");

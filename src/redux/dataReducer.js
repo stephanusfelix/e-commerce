@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const stock = JSON.parse(localStorage.getItem("k2_items"));
 const stock = JSON.parse(localStorage.getItem("k2_items"));
-// const stock = JSON.parse(localStorage.getItem("k1_items"));
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
@@ -42,12 +42,12 @@ export const dataSlice = createSlice({
     checkoutData: (state, action) => {
       let temp = [];
       let filterTemp = state.data.filter(
-        (item) => item.id == action.payload.id
+        (item) => item.id === action.payload.id
       );
       if (filterTemp.length > 0) {
         if (state.data.length > 0) {
           state.data.map((item) => {
-            if (item.id == action.payload.id) {
+            if (item.id === action.payload.id) {
               temp.push({
                 ...item,
                 countCart: 0,

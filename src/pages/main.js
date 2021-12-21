@@ -20,20 +20,28 @@ function Main(props) {
   }
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        // setData(response.data);
-        setIsLoaded(true);
-        let filter = filterResponse(response.data, stock);
-
-        setData(filter);
-      })
-      .catch((error) => {
-        setIsLoaded(true);
-        setError(error);
-        console.log(error);
-      });
+    if (!JSON.parse(localStorage.getItem("k2_items"))) {
+      let datas = [];
+      axios
+        .get(url)
+        .then((response) => {
+          setIsLoaded(true);
+          response.data.map((item) => {
+            datas.push({ ...item, total: 20 });
+          });
+          localStorage.setItem("k2_items", JSON.stringify(datas));
+          setData(datas);
+        })
+        .catch((error) => {
+          setIsLoaded(true);
+          setError(error);
+          console.log(error);
+        });
+    } else {
+      console.log("disini", JSON.parse(localStorage.getItem("k2_items")));
+      setData(JSON.parse(localStorage.getItem("k2_items")));
+      setIsLoaded(true);
+    }
   }, [url]);
 
   if (error) {

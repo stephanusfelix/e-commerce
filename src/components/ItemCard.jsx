@@ -16,11 +16,35 @@ const ItemCard = (props) => {
     if (JSON.parse(localStorage.getItem("user"))) {
       const data = {
         ...item,
-        countCart: item.countCart + 1,
-        total: item.total,
-        totalSales: 0,
       };
-      dispatch(addToCartData(data));
+      console.log("INDEX DATA", data);
+      // dispatch(addToCartData(data));
+      if (!JSON.parse(localStorage.getItem("k2_cart"))) {
+        localStorage.setItem(
+          "k2_cart",
+          JSON.stringify([{ ...data, countCart: 1 }])
+        );
+      } else {
+        let allData = JSON.parse(localStorage.getItem("k2_cart"));
+        let addedData = [];
+        let isAdd = false;
+        allData.map((item) => {
+          if (item.id === data.id) {
+            item.countCart += 1;
+            addedData.push(item);
+            isAdd = true;
+          } else {
+            addedData.push({ ...item, countCart: 1 });
+          }
+        });
+        if (!isAdd) {
+          addedData.push({ ...item, countCart: 1 });
+          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+        } else {
+          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+        }
+      }
+      console.log("AFTER ADD : ", JSON.parse(localStorage.getItem("k2_cart")));
       alert("Product " + item.title + " successfully added to cart");
     } else {
       history.push("/login");
