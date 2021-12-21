@@ -28,7 +28,7 @@ const Navbar = () => {
             <>
               {admin ? (
                 <li>
-                  <Link to="/login">Rekap Penjualan</Link>
+                  <Link to="/adminRekap">Rekap Penjualan</Link>
                 </li>
               ) : (
                 <li>
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </li>
               )}
               <li>
-                <Link to="/login">Logout</Link>
+                <Link to="/logout">Logout</Link>
               </li>
             </>
           ) : (
