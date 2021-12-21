@@ -1,0 +1,137 @@
+.main {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #e3f0ff, #fafcff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .cart-container {
+    width: 70%;
+    height: 90%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+  }
+
+  .checkout-container {
+    margin: 30px;
+    width: 15%;
+    height: 40%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+  }
+  .checkout-item {
+    margin: 20px auto;
+    width: 90%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .checkout-total {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 5px;
+    line-height: 10px;
+    font-size: 25px;
+    font-family: "Open Sans";
+    font-weight: 400;
+    color: #b99696;
+  }
+  .checkout-price {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .checkout-button {
+    margin-left: 30%;
+    background-color: blue;
+    height: 50px;
+    width: 100px;
+    border-radius: 20px;
+    border: 1px solid blue;
+    color: white;
+  }
+
+  .header {
+    margin: auto;
+    width: 90%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .heading {
+    font-size: 20px;
+    font-family: ‘Open Sans’;
+    font-weight: 700;
+    color: #2f3841;
+  }
+
+  .Cart-Items {
+    margin: 20px auto;
+    width: 90%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  Img {
+    height: 120px;
+    width: 100px;
+  }
+  .image-box {
+    width: 15%;
+    // text-align: center;
+  }
+  .about {
+    height: 100%;
+    width: 350px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title {
+    // text-align: left;
+    padding-top: 5px;
+    line-height: 10px;
+    font-size: 15px;
+    font-family: "Open Sans";
+    font-weight: 400;
+    color: #b99696;
+  }
+  .subtitle {
+    margin-top: 20px;
+    line-height: 10px;
+    font-size: 18px;
+    font-family: "Open Sans";
+    font-weight: 600;
+    color: #909090;
+  }
+
+  .counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .count {
+    width: 50px;
+    font-size: 20px;
+
+    font-weight: 900;
+    color: #202020;
+  }
+  .prices {
+    width: 150px;
+    height: 100%;
+    text-align: right;
+  }
+  .amount {
+    padding-top: 20px;
+    font-size: 26px;
+    font-family: ‘Open Sans’;
+    font-weight: 800;
+    color: #202020;
+  }
+}

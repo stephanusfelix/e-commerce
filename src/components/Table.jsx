@@ -7,25 +7,25 @@ function Table(props) {
   };
   const [data, setData] = useState([]);
   const onChanges = (event) => {
-    let newData = []
+    let newData = [];
     data.map((item) => {
-      if(parseInt(item.id)===parseInt(event.target.name)){
-        newData.push({ ...item,total:event.target.value });
-      }else{
+      if (parseInt(item.id) === parseInt(event.target.name)) {
+        newData.push({ ...item, total: event.target.value });
+      } else {
         newData.push({ ...item });
       }
-    })
-    setData(newData)
+    });
+    setData(newData);
   };
-  
+
   useEffect(() => {
-    setData(props.items)
-    console.log('masuk1')
+    setData(props.items);
+    console.log("masuk1");
   }, []);
   const click = () => {
     localStorage.setItem("k1_items", JSON.stringify(data));
-    alert('Data berhasil terupdate')
-  }
+    alert("Data berhasil terupdate");
+  };
   return (
     <>
       <table>
@@ -37,29 +37,33 @@ function Table(props) {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) =>
-         
-                <tr key={index}>
-                  <td>
-                    <div>
-                      <img style={styleImg} src={item.image} alt="brand" />
-                    </div>
-                    <div>
-                      <h1>{item.title}</h1>
-                      {item.description}
-                      <br/>
-                      {item.category}
-                    </div>
-                  </td>
-                  <td>
-                    <input value={item.total} name={item.id} onChange={onChanges}></input>
-                  </td>
-                  <td>
-                    <Button click={click} theme={"white1"}>Update</Button>
-                  </td>
-                </tr>
-             
-          )}
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <div>
+                  <img style={styleImg} src={item.image} alt="brand" />
+                </div>
+                <div>
+                  <h1>{item.title}</h1>
+                  {item.description}
+                  <br />
+                  {item.category}
+                </div>
+              </td>
+              <td>
+                <input
+                  value={item.total}
+                  name={item.id}
+                  onChange={onChanges}
+                ></input>
+              </td>
+              <td>
+                <Button click={click} theme={"white1"}>
+                  Update
+                </Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

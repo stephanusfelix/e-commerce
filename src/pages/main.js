@@ -3,25 +3,31 @@ import { useHistory } from "react-router-dom";
 import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
+import { filterResponse } from "../config/filterResponse";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Main(props) {
   const [data, setData] = useState([]);
   let url = "https://fakestoreapi.com/products";
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const stock = useSelector((state) => state.data.data);
+
   let history = useHistory();
   if (JSON.parse(localStorage.getItem("admin"))) {
-    history.push(`/homeAdmin`)
+    history.push(`/homeAdmin`);
   }
-  
+
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        // setData(response.data);
         setIsLoaded(true);
-        console.log(response.data);
+        let filter = filterResponse(response.data, stock);
+
+        setData(filter);
       })
       .catch((error) => {
         setIsLoaded(true);
@@ -53,7 +59,7 @@ function Main(props) {
           {data ? (
             <div className="Homelistproduct">
               {data.map((product, index) => (
-                <ItemCard data={product} key={index} />
+                <ItemCard product={product} key={index} />
               ))}
             </div>
           ) : (

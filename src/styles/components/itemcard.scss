@@ -58,3 +58,25 @@
   margin: 25px 25px 25px 25px;
   font-size: 0.7em;
 }
+
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10%;
+  outline: none;
+  border: none;
+  padding: 0;
+}
+
+.stock-available {
+  color: blue;
+  margin-top: 20px;
+}
+
+.stock-unavailable {
+  color: red;
+  margin-top: 20px;
+}
