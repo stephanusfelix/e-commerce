@@ -31,8 +31,8 @@ function App(props) {
     // localStorage.setItem("admin", JSON.parse(false));
     // localStorage.setItem("user", JSON.parse(true));
     //user/admin true = sudah login
-    localStorage.setItem("admin", JSON.parse(true));
-    localStorage.setItem("user", JSON.parse(false));
+    // localStorage.setItem("admin", JSON.parse(true));
+    // localStorage.setItem("user", JSON.parse(false));
   });
   return (
     <BrowserRouter>

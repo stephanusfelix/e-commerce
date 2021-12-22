@@ -13,9 +13,11 @@ export default class Routes extends React.Component {
     return (
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route exact path="/cart" component={Cart} />
         <Route path="/homeAdmin" component={AdminHome} />
         <Route path="/adminRekap" component={AdminRekap} />
+
         <Route path="/:id" component={Detail} />
       </Switch>
     );
