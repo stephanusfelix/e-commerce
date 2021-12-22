@@ -47,7 +47,8 @@ export default function Index() {
 
             }).then((res) => {
                 if (res.data.token) {
-                    console.log("sukses", res.data.token)
+                    localStorage.setItem('user',JSON.parse(true))
+                    history.push('/')
                 }else {
                     console.log(res.data.msg)
                 }

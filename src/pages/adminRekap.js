@@ -22,6 +22,7 @@ function AdminRekap() {
           <thead>
             <tr className="baris">
               <th>Product</th>
+              <th>Waktu</th>
               <th>Harga</th>
               <th>Terjual</th>
               <th>Pendapatan</th>
@@ -30,14 +31,15 @@ function AdminRekap() {
           {recapItem.length > 0 ? (
             <>
               <tbody>
-                {recapItem.map((item) => (
-                  <tr>
+                {recapItem.map((item,index) => (
+                  <tr key={index}>
                     <td>
                       <div>
                         <h2>{item.title}</h2>
                         <p>{item.category}</p>
                       </div>
                     </td>
+                    <td className="data">{item.time}</td>
                     <td className="data">{item.price}</td>
                     <td className="data">{parseInt(item.countCart)}</td>
                     <td className="data">

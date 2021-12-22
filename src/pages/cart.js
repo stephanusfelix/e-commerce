@@ -37,7 +37,7 @@ function Cart(props) {
       <>
         <div className="main">
           <div className="cart-container">
-            <div class="header">
+            <div className="header">
               <h3 className="heading">My Cart</h3>
             </div>
             <div className="container">
@@ -89,8 +89,8 @@ function Cart(props) {
             }}
           />
         </div>
-        <div class="prices">
-          <div class="amount"> ${item.countCart * item.price}</div>
+        <div className="prices">
+          <div className="amount"> ${item.countCart * item.price}</div>
         </div>
       </div>
     );
@@ -123,7 +123,6 @@ function Cart(props) {
     if (data.length > 0) {
 
       const allItem = JSON.parse(localStorage.getItem("k2_items"));
-      console.log("Before",allItem)
       const newAllItem = []
       let change = false;
       allItem.map((item)=>{
@@ -139,50 +138,23 @@ function Cart(props) {
         }
         change=false;
       })
-      console.log("After",newAllItem)
       localStorage.setItem("k2_items", JSON.stringify(newAllItem))
-      
+      const currentTime = new Date();
+      let timeArray = currentTime.toString().split(' ')
+      let newTime = `${timeArray[2]}-${timeArray[1]}-${timeArray[3]},${timeArray[4]}`
       if(!JSON.parse(localStorage.getItem("k2_recap"))){
-        console.log('if new',cart)
-        localStorage.setItem("k2_recap", JSON.stringify(cart))
+        const newCart = []
+        cart.map((item=>{
+          newCart.push({...item,time:newTime})
+        }))
+        localStorage.setItem("k2_recap", JSON.stringify(newCart))
       }else {
         const dataRecap = JSON.parse(localStorage.getItem("k2_recap"));
-        let newDataRecap = []
-        dataRecap.map((item)=>{
-          cart.map((item2)=>{
-            if(item.id===item2.id){
-              item.countCart+=item2.countCart
-              newDataRecap.push(item)
-              change = true;
-            }
-            if(!change){
-              newDataRecap.push(item)
-            }
-            change = false;
-          })
-        })
-        console.log('midle',newDataRecap)
-        let index = 0
-        let newRecaps = false;
-        let haveRecaps = false;
-        for(let i = 0;i<cart.length;i++){
-          while(index<dataRecap.length){
-            if(cart[i].id!==dataRecap[index].id){
-              index++;
-              newRecaps = true;
-            }else{
-              haveRecaps = true;
-              index++;
-            }
-          }
-          if(newRecaps && !haveRecaps){
-            newDataRecap.push(cart[i])
-          }
-          newRecaps = false;
-          haveRecaps = false;
-        }
-        console.log("if any",newDataRecap)
-        localStorage.setItem("k2_recap", JSON.stringify([...newDataRecap]))
+        const newCart = []
+        dataRecap.map((item=>{
+          newCart.push({...item,time:newTime})
+        }))
+        localStorage.setItem("k2_recap", JSON.stringify(newCart))
       }
       localStorage.removeItem("k2_cart");
       setCart([])
