@@ -8,6 +8,7 @@ function Table(props) {
   const [data, setData] = useState([]);
   const onChanges = (event) => {
     let newData = [];
+    // eslint-disable-next-line
     data.map((item) => {
       if (parseInt(item.id) === parseInt(event.target.name)) {
         newData.push({ ...item, total: event.target.value });
@@ -20,9 +21,10 @@ function Table(props) {
 
   useEffect(() => {
     setData(props.items);
+    // eslint-disable-next-line
   }, []);
   const click = () => {
-    localStorage.setItem("k1_items", JSON.stringify(data));
+    localStorage.setItem("k2_items", JSON.stringify(data));
     alert("Data berhasil terupdate");
   };
   return (

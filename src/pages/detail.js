@@ -25,9 +25,10 @@ function Detail(props) {
           let allData = JSON.parse(localStorage.getItem("k2_cart"));
           let addedData = [];
           let isAdd = false;
+          // eslint-disable-next-line
           allData.map((item) => {
             if (item.id === data.id) {
-              item.countCart += currentStock;
+            item.countCart = parseInt(item.countCart) + parseInt(currentStock);
               addedData.push(item);
               isAdd = true;
             } else {

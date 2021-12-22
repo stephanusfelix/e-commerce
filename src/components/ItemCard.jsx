@@ -27,6 +27,7 @@ const ItemCard = (props) => {
           let allData = JSON.parse(localStorage.getItem("k2_cart"));
           let addedData = [];
           let isAdd = false;
+          // eslint-disable-next-line
           allData.map((item) => {
             if (item.id === data.id) {
               item.countCart += 1;

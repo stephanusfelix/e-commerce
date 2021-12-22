@@ -4,14 +4,18 @@ import "../styles/pages/adminRekap.scss";
 function AdminRekap() {
   const [recapItem, setRecapItem] = useState([]);
   let [total,setTotal] = useState(0);
+
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("k2_recap"));
     if (JSON.parse(localStorage.getItem("k2_recap"))) {
       setRecapItem(data);
+      // eslint-disable-next-line
       data.map((item)=>{
-          setTotal(total+(item.price*(parseInt(item.countCart))))
+        // eslint-disable-next-line
+          setTotal(total+=(item.price*(parseInt(item.countCart))))
       })
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <>

@@ -16,6 +16,7 @@ function HomeAdmin(props) {
       axios
         .get(url)
         .then((response) => {
+          // eslint-disable-next-line
           response.data.map((item) => {
             datas.push({ ...item, total: 20 });
           });
@@ -27,6 +28,7 @@ function HomeAdmin(props) {
     } else {
       setData(JSON.parse(localStorage.getItem("k2_items")));
     }
+    // eslint-disable-next-line
   }, [url]);
 
   return (

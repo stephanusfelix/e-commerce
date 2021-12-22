@@ -23,6 +23,7 @@ function Main(props) {
         .get(url)
         .then((response) => {
           setIsLoaded(true);
+          // eslint-disable-next-line
           response.data.map((item) => {
             datas.push({ ...item, total: 20 });
           });

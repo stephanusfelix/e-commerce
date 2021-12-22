@@ -42,7 +42,6 @@ function Button(props) {
         onClick={props.click}
         style={styles}
         disabled={props.disable}
-        onClick={props.click}
       >
         {props.children}
       </button>

@@ -12,6 +12,7 @@ function Cart(props) {
     if (JSON.parse(localStorage.getItem("k2_cart"))) {
       setCart(data);
       let totalHarga = 0;
+      // eslint-disable-next-line
       data.map((item) => {
         totalHarga += item.countCart * item.price;
       });
@@ -50,10 +51,7 @@ function Cart(props) {
     );
   }
   function ItemCart({ item }) {
-    let isAvailable = true;
-    if (item.countCart > item.total) {
-      isAvailable = false;
-    }
+
     return (
       <div className="Cart-Items">
         <div className="Image-box">
@@ -83,6 +81,7 @@ function Cart(props) {
 
     function setCountCart(value, id) {
       const updateData = [];
+      // eslint-disable-next-line
       cart.map((item) => {
         if (id === item.id) {
           item.countCart = value;
@@ -97,6 +96,7 @@ function Cart(props) {
     }
     function updateTotalPrice() {
       let totalHarga = 0;
+      // eslint-disable-next-line
       cart.map((item) => {
         totalHarga += item.countCart * item.price;
       });
@@ -110,8 +110,9 @@ function Cart(props) {
       const allItem = JSON.parse(localStorage.getItem("k2_items"));
       const newAllItem = [];
       let change = false;
-
+      // eslint-disable-next-line
       allItem.map((item) => {
+        // eslint-disable-next-line
         cart.map((item2) => {
           if (item.id === item2.id) {
             item.total -= item2.countCart;
@@ -125,7 +126,6 @@ function Cart(props) {
         change = false;
       });
 
-
       localStorage.setItem("k2_items", JSON.stringify(newAllItem));
       const currentTime = new Date();
       let timeArray = currentTime.toString().split(" ");
@@ -133,6 +133,7 @@ function Cart(props) {
 
       if (!JSON.parse(localStorage.getItem("k2_recap"))) {
         const newCart = [];
+        // eslint-disable-next-line
         cart.map((item) => {
           newCart.push({ ...item, time: newTime });
         });
@@ -140,10 +141,14 @@ function Cart(props) {
       } else {
         const dataRecap = JSON.parse(localStorage.getItem("k2_recap"));
         const newCart = [];
+        // eslint-disable-next-line
         cart.map((item) => {
           newCart.push({ ...item, time: newTime });
         });
-        localStorage.setItem("k2_recap", JSON.stringify([...dataRecap,...newCart]));
+        localStorage.setItem(
+          "k2_recap",
+          JSON.stringify([...dataRecap, ...newCart])
+        );
       }
 
       localStorage.removeItem("k2_cart");
