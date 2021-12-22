@@ -8,9 +8,7 @@ import AdminRekap from "../pages/adminRekap";
 import Cart from "../pages/cart";
 import Logout from "../components/logout";
 
-
 export default class Routes extends React.Component {
-
   render() {
     return (
       <Switch>

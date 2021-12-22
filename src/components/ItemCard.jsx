@@ -13,39 +13,49 @@ const ItemCard = (props) => {
   const history = useHistory();
 
   function add(item) {
+    if (!JSON.parse(localStorage.getItem("user"))) {
+      history.push("/login");
+    }
     if (JSON.parse(localStorage.getItem("user"))) {
-      const data = {
-        ...item,
-      };
-      console.log("INDEX DATA", data);
-      // dispatch(addToCartData(data));
-      if (!JSON.parse(localStorage.getItem("k2_cart"))) {
-        localStorage.setItem(
-          "k2_cart",
-          JSON.stringify([{ ...data, countCart: 1 }])
-        );
-      } else {
-        let allData = JSON.parse(localStorage.getItem("k2_cart"));
-        let addedData = [];
-        let isAdd = false;
-        allData.map((item) => {
-          if (item.id === data.id) {
-            item.countCart += 1;
-            addedData.push(item);
-            isAdd = true;
-          } else {
-            addedData.push({ ...item, countCart: 1 });
-          }
-        });
-        if (!isAdd) {
-          addedData.push({ ...item, countCart: 1 });
-          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+      if (product.total > 0) {
+        const data = {
+          ...item,
+        };
+        console.log("INDEX DATA", data);
+        // dispatch(addToCartData(data));
+        if (!JSON.parse(localStorage.getItem("k2_cart"))) {
+          localStorage.setItem(
+            "k2_cart",
+            JSON.stringify([{ ...data, countCart: 1 }])
+          );
         } else {
-          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+          let allData = JSON.parse(localStorage.getItem("k2_cart"));
+          let addedData = [];
+          let isAdd = false;
+          allData.map((item) => {
+            if (item.id === data.id) {
+              item.countCart += 1;
+              addedData.push(item);
+              isAdd = true;
+            } else {
+              addedData.push({ ...item });
+            }
+          });
+          if (!isAdd) {
+            addedData.push({ ...item, countCart: 1 });
+            localStorage.setItem("k2_cart", JSON.stringify(addedData));
+          } else {
+            localStorage.setItem("k2_cart", JSON.stringify(addedData));
+          }
         }
+        console.log(
+          "AFTER ADD : ",
+          JSON.parse(localStorage.getItem("k2_cart"))
+        );
+        alert("Product " + item.title + " successfully added to cart");
+      } else {
+        alert("Maaf produk kosong");
       }
-      console.log("AFTER ADD : ", JSON.parse(localStorage.getItem("k2_cart")));
-      alert("Product " + item.title + " successfully added to cart");
     } else {
       history.push("/login");
       alert("Please login first to continue");
@@ -80,11 +90,7 @@ const ItemCard = (props) => {
             <Button theme={"blue"}>Detail</Button>
           </Link>
 
-          <Button
-            theme={"white"}
-            disable={product.total > 0 ? false : true}
-            click={() => add(product)}
-          >
+          <Button theme={"white"} click={() => add(product)}>
             {" "}
             Add to Cart
           </Button>

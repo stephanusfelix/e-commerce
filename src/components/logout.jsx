@@ -1,15 +1,18 @@
-import React from 'react';
-import { useHistory } from 'react-router';
-import "../styles/components/logout.scss"
+import React from "react";
+import { useHistory } from "react-router";
+import "../styles/components/logout.scss";
 
 function Logout() {
-    let history = useHistory()
+  let history = useHistory();
+  if (JSON.parse(localStorage.getItem("user"))) {
+    localStorage.removeItem("user");
+  } else if (JSON.parse(localStorage.getItem("admin"))) {
     localStorage.removeItem("admin");
     localStorage.removeItem("user");
 
-    const logout = () => {
-        history.push('/login'); 
-    } 
+  const logout = () => {
+    history.push("/login");
+  };
 
     return (
         <div className="mains">
@@ -20,4 +23,3 @@ function Logout() {
 }
 
 export default Logout;
-

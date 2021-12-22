@@ -24,7 +24,6 @@ const renderHome = () => {
 };
 
 function App(props) {
-
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('item'));
     props.add(items)
