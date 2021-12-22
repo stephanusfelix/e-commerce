@@ -15,10 +15,35 @@ function Detail(props) {
     if (JSON.parse(localStorage.getItem("user"))) {
       const data = {
         ...state.detail,
-        countCart: parseInt(currentStock) + parseInt(state.detail.countCart),
-        totalSales: 0,
       };
-      dispatch(addToCartData(data));
+      console.log("INDEX DATA", data);
+      // dispatch(addToCartData(data));
+      if (!JSON.parse(localStorage.getItem("k2_cart"))) {
+        localStorage.setItem(
+          "k2_cart",
+          JSON.stringify([{ ...data, countCart: currentStock }])
+        );
+      } else {
+        let allData = JSON.parse(localStorage.getItem("k2_cart"));
+        let addedData = [];
+        let isAdd = false;
+        allData.map((item) => {
+          if (item.id === data.id) {
+            item.countCart += currentStock;
+            addedData.push(item);
+            isAdd = true;
+          } else {
+            addedData.push({ ...state.detail, countCart: 1 });
+          }
+        });
+        if (!isAdd) {
+          addedData.push({ ...state.detail, countCart: 1 });
+          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+        } else {
+          localStorage.setItem("k2_cart", JSON.stringify(addedData));
+        }
+      }
+      console.log("AFTER ADD : ", JSON.parse(localStorage.getItem("k2_cart")));
       setCurrentStock(0);
       alert("Product " + state.detail.title + " successfully added to cart");
     } else {

@@ -11,22 +11,22 @@ function HomeAdmin(props) {
     if (JSON.parse(localStorage.getItem("user"))) {
       history.push(`/`);
     }
-    if (!JSON.parse(localStorage.getItem("k1_items"))) {
+    if (!JSON.parse(localStorage.getItem("k2_items"))) {
       let datas = [];
       axios
         .get(url)
         .then((response) => {
           response.data.map((item) => {
-            datas.push({ ...item, total: 25 });
+            datas.push({ ...item, total: 20 });
           });
-          localStorage.setItem("k1_items", JSON.stringify(datas));
+          localStorage.setItem("k2_items", JSON.stringify(datas));
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      console.log("disini", JSON.parse(localStorage.getItem("k1_items")));
-      setData(JSON.parse(localStorage.getItem("k1_items")));
+      console.log("disini", JSON.parse(localStorage.getItem("k2_items")));
+      setData(JSON.parse(localStorage.getItem("k2_items")));
     }
   }, [url]);
 

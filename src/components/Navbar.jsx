@@ -28,7 +28,7 @@ const Navbar = () => {
             <>
               {admin ? (
                 <li>
-                  <Link to="/login">Rekap Penjualan</Link>
+                  <Link to="/adminRekap">Rekap Penjualan</Link>
                 </li>
               ) : (
                 <li>
