@@ -1,15 +1,12 @@
-import { React, useState } from "react";
+import React from "react";
 import "../styles/components/itemcard.scss";
 import Button from "./itemcard/Button";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { addToCartData } from "../redux/dataReducer";
-import { useDispatch, useSelector } from "react-redux";
 import { Desc, Image, Title, Category, Price } from "./itemcard/index.js";
 
 const ItemCard = (props) => {
   const product = props.product;
-  const dispatch = useDispatch();
   const history = useHistory();
 
   function add(item) {
@@ -21,8 +18,6 @@ const ItemCard = (props) => {
         const data = {
           ...item,
         };
-        console.log("INDEX DATA", data);
-        // dispatch(addToCartData(data));
         if (!JSON.parse(localStorage.getItem("k2_cart"))) {
           localStorage.setItem(
             "k2_cart",
@@ -48,10 +43,6 @@ const ItemCard = (props) => {
             localStorage.setItem("k2_cart", JSON.stringify(addedData));
           }
         }
-        console.log(
-          "AFTER ADD : ",
-          JSON.parse(localStorage.getItem("k2_cart"))
-        );
         alert("Product " + item.title + " successfully added to cart");
       } else {
         alert("Maaf produk kosong");

@@ -6,7 +6,6 @@ function AdminRekap() {
   let [total,setTotal] = useState(0);
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("k2_recap"));
-    console.log("recap", data);
     if (JSON.parse(localStorage.getItem("k2_recap"))) {
       setRecapItem(data);
       data.map((item)=>{
@@ -41,17 +40,17 @@ function AdminRekap() {
                     </td>
                     <td className="data">{item.time}</td>
                     <td className="data">{item.price}</td>
-                    <td className="data">{parseInt(item.countCart)}</td>
+                    <td className="data">${parseInt(item.countCart)}</td>
                     <td className="data">
-                      {parseInt(item.countCart) * item.price}
+                      ${parseInt(item.countCart) * item.price}
                     </td>
                   </tr>
                 ))}
                 <tr>
-                  <td colSpan={3} id="total">
+                  <td colSpan={4} id="total">
                     <h2>TOTAL PENDAPATAN</h2>
                   </td>
-                  <td className="data">{total}</td>
+                  <td className="data">${total}</td>
                 </tr>
               </tbody>
             </>

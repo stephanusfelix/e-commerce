@@ -31,7 +31,6 @@ export default function Index() {
 
         
         if (username === "admin@bukapedia.com" && password === "admin123") {
-            console.log("sukses ",username)
             localStorage.setItem('admin',JSON.parse(true))
             history.push('/homeAdmin')
             

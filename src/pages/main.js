@@ -3,16 +3,13 @@ import { useHistory } from "react-router-dom";
 import "../styles/pages/main.scss";
 import ItemCard from "../components/ItemCard.jsx";
 import Spinner from "../components/loading/Spinner";
-import { filterResponse } from "../config/filterResponse";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 function Main(props) {
   const [data, setData] = useState([]);
   let url = "https://fakestoreapi.com/products";
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const stock = useSelector((state) => state.data.data);
 
   let history = useHistory();
   if (JSON.parse(localStorage.getItem("admin"))) {
@@ -38,7 +35,6 @@ function Main(props) {
           console.log(error);
         });
     } else {
-      console.log("disini", JSON.parse(localStorage.getItem("k2_items")));
       setData(JSON.parse(localStorage.getItem("k2_items")));
       setIsLoaded(true);
     }

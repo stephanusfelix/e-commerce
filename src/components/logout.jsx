@@ -9,7 +9,7 @@ function Logout() {
   } else if (JSON.parse(localStorage.getItem("admin"))) {
     localStorage.removeItem("admin");
     localStorage.removeItem("user");
-
+  }
   const logout = () => {
     history.push("/login");
   };

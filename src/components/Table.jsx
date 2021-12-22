@@ -20,7 +20,6 @@ function Table(props) {
 
   useEffect(() => {
     setData(props.items);
-    console.log("masuk1");
   }, []);
   const click = () => {
     localStorage.setItem("k1_items", JSON.stringify(data));

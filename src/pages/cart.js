@@ -1,36 +1,23 @@
 import { React, useState, useEffect } from "react";
 import "../styles/pages/cart.scss";
-import Spinner from "../components/loading/Spinner";
-import { filterResponse } from "../config/filterResponse";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCartData, checkoutData } from "../redux/dataReducer";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 function Cart(props) {
   let history = useHistory();
-  let url = "https://fakestoreapi.com/products";
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const stock = useSelector((state) => state.data.data);
-  const dispatch = useDispatch();
   const [cart, setCart] = useState([]);
   const [prices, setPrices] = useState(0);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("k2_cart"));
-    if(JSON.parse(localStorage.getItem("k2_cart"))){
-      
-      setCart(data)
+    if (JSON.parse(localStorage.getItem("k2_cart"))) {
+      setCart(data);
       let totalHarga = 0;
-      data.map((item)=>{
-        totalHarga+= (item.countCart*item.price)
-      })
-      setPrices(totalHarga)
+      data.map((item) => {
+        totalHarga += item.countCart * item.price;
+      });
+      setPrices(totalHarga);
     }
   }, []);
-
-
 
   if (cart) {
     return (
@@ -63,7 +50,6 @@ function Cart(props) {
     );
   }
   function ItemCart({ item }) {
-
     let isAvailable = true;
     if (item.countCart > item.total) {
       isAvailable = false;
@@ -85,7 +71,7 @@ function Cart(props) {
             className="quantity form-control"
             value={item.countCart}
             onChange={(v) => {
-              setCountCart(v.target.value,item.id);
+              setCountCart(v.target.value, item.id);
             }}
           />
         </div>
@@ -95,72 +81,76 @@ function Cart(props) {
       </div>
     );
 
-    function setCountCart(value,id) {
-      const updateData = []
-      cart.map((item)=>{
-        if(id===item.id){
-          item.countCart=value;
-          updateData.push(item)
-        }else{
-          updateData.push(item)
+    function setCountCart(value, id) {
+      const updateData = [];
+      cart.map((item) => {
+        if (id === item.id) {
+          item.countCart = value;
+          updateData.push(item);
+        } else {
+          updateData.push(item);
         }
-      })
-      setCart(updateData)
-      localStorage.setItem("k2_cart", JSON.stringify(updateData))
-      updateTotalPrice()
+      });
+      setCart(updateData);
+      localStorage.setItem("k2_cart", JSON.stringify(updateData));
+      updateTotalPrice();
     }
-    function updateTotalPrice(){
+    function updateTotalPrice() {
       let totalHarga = 0;
-      cart.map((item)=>{
-        totalHarga+= (item.countCart*item.price)
-      })
-      setPrices(totalHarga)
+      cart.map((item) => {
+        totalHarga += item.countCart * item.price;
+      });
+      setPrices(totalHarga);
     }
   }
 
   async function checkoutProduct() {
     const data = cart.filter((item) => item.total >= item.countCart);
     if (data.length > 0) {
-
       const allItem = JSON.parse(localStorage.getItem("k2_items"));
-      const newAllItem = []
+      const newAllItem = [];
       let change = false;
-      allItem.map((item)=>{
-        cart.map((item2)=>{
-          if(item.id===item2.id){
-            item.total-=item2.countCart;
-            newAllItem.push(item)
+
+      allItem.map((item) => {
+        cart.map((item2) => {
+          if (item.id === item2.id) {
+            item.total -= item2.countCart;
+            newAllItem.push(item);
             change = true;
           }
-        })
-        if(!change){
-          newAllItem.push(item)
+        });
+        if (!change) {
+          newAllItem.push(item);
         }
-        change=false;
-      })
-      localStorage.setItem("k2_items", JSON.stringify(newAllItem))
+        change = false;
+      });
+
+
+      localStorage.setItem("k2_items", JSON.stringify(newAllItem));
       const currentTime = new Date();
-      let timeArray = currentTime.toString().split(' ')
-      let newTime = `${timeArray[2]}-${timeArray[1]}-${timeArray[3]},${timeArray[4]}`
-      if(!JSON.parse(localStorage.getItem("k2_recap"))){
-        const newCart = []
-        cart.map((item=>{
-          newCart.push({...item,time:newTime})
-        }))
-        localStorage.setItem("k2_recap", JSON.stringify(newCart))
-      }else {
+      let timeArray = currentTime.toString().split(" ");
+      let newTime = `${timeArray[2]}-${timeArray[1]}-${timeArray[3]},${timeArray[4]}`;
+
+      if (!JSON.parse(localStorage.getItem("k2_recap"))) {
+        const newCart = [];
+        cart.map((item) => {
+          newCart.push({ ...item, time: newTime });
+        });
+        localStorage.setItem("k2_recap", JSON.stringify(newCart));
+      } else {
         const dataRecap = JSON.parse(localStorage.getItem("k2_recap"));
-        const newCart = []
-        dataRecap.map((item=>{
-          newCart.push({...item,time:newTime})
-        }))
-        localStorage.setItem("k2_recap", JSON.stringify(newCart))
+        const newCart = [];
+        cart.map((item) => {
+          newCart.push({ ...item, time: newTime });
+        });
+        localStorage.setItem("k2_recap", JSON.stringify([...dataRecap,...newCart]));
       }
+
       localStorage.removeItem("k2_cart");
-      setCart([])
-      setPrices(0)
+      setCart([]);
+      setPrices(0);
       alert("Checkout Berhasil");
-      // history.push(`/`);
+      history.push(`/`);
     } else {
       console.log(data);
       alert("Checkout gagal");

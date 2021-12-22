@@ -1,15 +1,12 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import "../styles/pages/detail.scss";
 import { useLocation } from "react-router";
 import { Image, Title, Category, Price } from "../components/itemcard/index.js";
-import { addToCartData } from "../redux/dataReducer";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 function Detail(props) {
   const { state } = useLocation();
   const product = state.detail.total;
-  const dispatch = useDispatch();
   const history = useHistory();
   const [currentStock, setCurrentStock] = useState(1);
 
@@ -19,8 +16,6 @@ function Detail(props) {
         const data = {
           ...state.detail,
         };
-        console.log("INDEX DATA", data);
-        // dispatch(addToCartData(data));
         if (!JSON.parse(localStorage.getItem("k2_cart"))) {
           localStorage.setItem(
             "k2_cart",
@@ -46,10 +41,6 @@ function Detail(props) {
             localStorage.setItem("k2_cart", JSON.stringify(addedData));
           }
         }
-        console.log(
-          "AFTER ADD : ",
-          JSON.parse(localStorage.getItem("k2_cart"))
-        );
         setCurrentStock(0);
         alert("Product " + state.detail.title + " successfully added to cart");
       } else {

@@ -31,7 +31,6 @@ const counterReducer = (
         ...state,
       };
     case "ADD_ITEMS":
-      console.log("CALLED", action.payload.item);
       state.item = action.payload.item;
       return {
         ...state,

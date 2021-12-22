@@ -25,7 +25,6 @@ function HomeAdmin(props) {
           console.log(error);
         });
     } else {
-      console.log("disini", JSON.parse(localStorage.getItem("k2_items")));
       setData(JSON.parse(localStorage.getItem("k2_items")));
     }
   }, [url]);
