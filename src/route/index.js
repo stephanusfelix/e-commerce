@@ -1,14 +1,25 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Login from '../pages/login'
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Login from "../pages/login";
+import Main from "../pages/main";
+import Detail from "../pages/detail";
+import AdminHome from "../pages/homeAdmin";
+import AdminRekap from "../pages/adminRekap";
+import Logout from "../components/logout";
 
-export default class Routes extends React.Component{
-    render(){
-        return(
-            <Switch>
-                <Route  path="/login" component={Login}/>
-                
-            </Switch>
-        )
-    }
+
+export default class Routes extends React.Component {
+
+  render() {
+    return (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
+        <Route exact path="/" component={Main} />
+        <Route path="/homeAdmin" component={AdminHome}/>
+        <Route path="/adminRekap" component={AdminRekap}/>
+        <Route path="/:id" component={Detail} />
+      </Switch>
+    );
+  }
 }
