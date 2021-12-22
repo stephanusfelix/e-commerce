@@ -6,13 +6,18 @@ import Detail from "../pages/detail";
 import AdminHome from "../pages/homeAdmin";
 import AdminRekap from "../pages/adminRekap";
 import Cart from "../pages/cart";
+import Logout from "../components/logout";
+
 
 export default class Routes extends React.Component {
+
   render() {
     return (
       <Switch>
         <Route path="/login" component={Login} />
         <Route exact path="/cart" component={Cart} />
+        <Route path="/logout" component={Logout} />
+        <Route exact path="/" component={Main} />
         <Route path="/homeAdmin" component={AdminHome}/>
         <Route path="/adminRekap" component={AdminRekap}/>
         <Route path="/:id" component={Detail} />

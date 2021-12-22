@@ -1,0 +1,22 @@
+.main{
+    text-align: center;
+    margin-top: 10%;
+
+    #title{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: gray;
+    }
+    
+    #button{
+        width: 120px;
+        height: 40px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: gray;
+        color: white;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+}

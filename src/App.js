@@ -24,12 +24,11 @@ const renderHome = () => {
 };
 
 function App(props) {
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('item'));
     props.add(items)
-    localStorage.removeItem("k2_recap");
-    localStorage.setItem('admin',JSON.parse(false))
-    localStorage.setItem('user',JSON.parse(true))
+    
     //user/admin true = sudah login 
   });
   return (
