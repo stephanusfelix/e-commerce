@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import { toast } from "react-toastify";
 import axios from 'axios';
+import { useHistory } from 'react-router';
+
 
 import "./styles.css"
 
 export default function Index() {
 
+    let history = useHistory()
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
@@ -25,11 +28,13 @@ export default function Index() {
 
 
     async function submitLogin() {
-        // var usernameRegex = /\S+@\S+\.\S+/;
+
         
         if (username === "admin@bukapedia.com" && password === "admin123") {
-          console.log("sukses ",username)
-
+            console.log("sukses ",username)
+            localStorage.setItem('admin',JSON.parse(true))
+            history.push('/homeAdmin')
+            
         } else {
 
             await postRequest("auth/login", {
@@ -50,24 +55,6 @@ export default function Index() {
           
         }  
     }
-
-
-    // const submitLogin = () => {
-
-    //     if (username === "admin@bukapedia.com" && password === "admin123"){
-    //         console.log("sukses" , username)
-    //     }else{
-    //         fetch('https://fakestoreapi.com/auth/login',{
-    //             method:'POST',
-    //             body:JSON.stringify({
-    //                 username: username,
-    //                 password: username
-    //             })
-    //         })
-    //         .then(res=>res.json())
-    //         .then(json=>console.log(json.data.token))
-    //     }
-    // }
 
     return (
         <div className="form-login">
